@@ -1,0 +1,32 @@
+.header {
+  height: 10vh;
+  width: 100vw;
+  background-color: #000000;
+  padding: 20px 0;
+  text-align: center;
+  font-size: 24px;
+  display: flex;
+  border-bottom: 4px #ff0000 solid;
+}
+.header div {
+  justify-content: left;
+}
+.header nav {
+  justify-content: right;
+  gap: 1rem;
+}
+.header nav,
+.header div {
+  flex: 1;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  color: #fff;
+}
+.header nav a {
+  text-decoration: none;
+  color: inherit;
+}
+.header nav a:hover {
+  text-decoration: underline;
+}
