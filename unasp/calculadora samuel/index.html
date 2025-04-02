@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora legal</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: oklch(90.1% 0.058 230.902);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      .container {
+        width: 300px;
+        background-color: oklch(20.8% 0.042 265.755);
+        border-radius: 10px;
+      }
+      .display {
+        padding: 20px 10px 0 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .display input {
+        width: 100%;
+        height: 50px;
+        font-size: 50px;
+        border: none;
+        outline: none;
+        text-align: right;
+        background-color: inherit;
+        color: #fff;
+      }
+      .buttons {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+        padding: 20px 10px;
+      }
+      button {
+        width: 100%;
+        height: 60px;
+        font-size: 25px;
+        font-weight: bold;
+        color: #fff;
+        border-radius: 5px;
+        border: none;
+        outline: none;
+        background-color: oklch(37.3% 0.034 259.733);
+        cursor: pointer;
+        transition: filter 0.3s;
+      }
+      button:hover {
+        filter: brightness(1.3);            
+      }
+      .operator {
+        background-color: oklch(75% 0.183 55.934);
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="display">
+        <input type="text" id="display" readonly>
+      </div>
+      <div class="buttons">
+        <button class="operator" value="C">C</button>
+        <button class="operator" value="(">(</button>
+        <button class="operator" value=")">)</button>
+        <button class="operator" value="/">/</button>
+        <button value="7">7</button>
+        <button value="8">8</button>
+        <button value="9">9</button>
+        <button class="operator" value="*">*</button>
+        <button value="4">4</button>
+        <button value="5">5</button>
+        <button value="6">6</button>
+        <button class="operator" value="-">-</button>
+        <button value="1">1</button>
+        <button value="2">2</button>
+        <button value="3">3</button>
+        <button class="operator" value="+">+</button>
+        <button value="0">0</button>
+        <button value=".">.</button>
+        <div class="empty"></div>
+        <button class="operator" value="=">=</button>
+      </div>
+    <script>
+      const display = document.getElementById('display');
+      const buttons = document.querySelectorAll('button');
+
+      buttons.forEach(button => {
+        button.addEventListener('click', () => {
+          if (button.value === '=') {
+            try {
+              display.value = eval(display.value);
+            } catch {
+              display.value = "Syntax Error";
+            }
+          } else if (button.value === 'C') {
+            display.value = '';
+          } else if (display.value === "Erro") {
+            display.value = button.value;
+          } else {
+            display.value += button.value;
+          }
+        });
+      });
+    </script>  
+  </body>
+</html>
