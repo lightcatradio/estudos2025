@@ -123,8 +123,7 @@
           } else if (button.value === 'C') {
             display.value = '';
           } else if (display.value === 'Syntax Error') {
-            display.value = '';
-            display.value += button.value;
+            display.value = button.value;
           } else {
             display.value += button.value;
           }
