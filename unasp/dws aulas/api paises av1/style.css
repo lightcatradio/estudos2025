@@ -1,0 +1,96 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Nunito", sans-serif;
+  background-color: antiquewhite;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 2rem;
+  align-items: center;
+  padding: 2rem;
+}
+
+header,
+main {
+  width: 100%;
+  background-color: white;
+  padding: 2rem;
+  border: 3px solid black;
+  border-radius: 25px;
+}
+
+header {
+  font-size: 1em;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.searchbox,
+.regionbuttons {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+}
+
+.searchbox input {
+  width: 50%;
+}
+
+.searchbox button,
+.regionbuttons button {
+  background-color: black;
+  color: white;
+}
+
+.regionbuttons button {
+  width: 120px;
+}
+
+.searchbox input,
+.searchbox button,
+.regionbuttons button {
+  padding: 10px;
+  border: 2px solid black;
+  border-radius: 10px;
+  transition: all 0.1s ease;
+}
+
+.searchbox button:hover,
+.searchbox input:focus,
+.regionbuttons button:hover {
+  transform: scale(1.03);
+}
+
+.searchbox button:active,
+.regionbuttons button:active {
+  background-color: gray;
+}
+
+main {
+  height: fit-content;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.country {
+  flex: 1;
+  padding: 20px;
+  border: 2px solid black;
+  border-radius: 10px;
+}
+
+.country img {
+  width: 300px;
+  height: 200px;
+  border: 1px solid black;
+}

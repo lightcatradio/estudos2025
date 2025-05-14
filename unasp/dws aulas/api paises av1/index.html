@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>API Países</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Chewy&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Lista de Países do Mundo</h1>
+      <div class="searchbox">
+        <input id="searchbox" type="text" placeholder="Pesquisar país..." />
+        <button onclick="Search()">Pesquisar</button>
+      </div>
+      <div class="regionbuttons">
+        <button onclick="SetRegion()">Todos</button>
+        <button onclick="SetRegion()">Africa</button>
+        <button onclick="SetRegion()">America</button>
+        <button onclick="SetRegion()">Asia</button>
+        <button onclick="SetRegion()">Europe</button>
+        <button onclick="SetRegion()">Oceania</button>
+      </div>
+    </header>
+    <main></main>
+    <script>
+      function Search() {
+        const searchbox = document
+          .getElementById("searchbox")
+          .value.toLowerCase();
+        const countryDivs = document.querySelectorAll(".country");
+        countryDivs.forEach((countryDiv) => {
+          const countryName = countryDiv
+            .querySelector("h2")
+            .textContent.toLowerCase();
+          if (countryName.includes(searchbox)) {
+            countryDiv.style.display = "block";
+          } else {
+            countryDiv.style.display = "none";
+          }
+        });
+      }
+
+      function SetRegion() {
+        const region = event.target.textContent.toLowerCase();
+        const countryDivs = document.querySelectorAll(".country");
+        countryDivs.forEach((countryDiv) => {
+          const countryRegion = countryDiv
+            .querySelector("p:nth-child(4)")
+            .textContent.split(": ")[1];
+          if (region === "Todos" || countryRegion === region) {
+            countryDiv.style.display = "block";
+          } else {
+            countryDiv.style.display = "none";
+          }
+        });
+      }
+
+      const response = fetch("https://restcountries.com/v3.1/all");
+      response
+        .then((response) => response.json())
+        .then((countries) => {
+          const main = document.querySelector("main");
+          countries.forEach((country) => {
+            const countryDiv = document.createElement("div");
+            countryDiv.classList.add("country");
+            countryDiv.innerHTML = `
+            <h2>${country.name.common}</h2>
+            <img src="${country.flags.png}" alt="Bandeira de ${country.name.common}" />
+            <p>Capital: ${country.capital}</p>
+            <p>População: ${country.population}</p>
+            <p>Região: ${country.region}</p>
+            `;
+            main.appendChild(countryDiv);
+          });
+        });
+    </script>
+  </body>
+</html>
