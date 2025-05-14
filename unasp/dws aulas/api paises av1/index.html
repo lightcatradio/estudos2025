@@ -20,12 +20,12 @@
         <button onclick="Search()">Pesquisar</button>
       </div>
       <div class="regionbuttons">
-        <button onclick="SetRegion()">Todos</button>
-        <button onclick="SetRegion()">Africa</button>
-        <button onclick="SetRegion()">America</button>
-        <button onclick="SetRegion()">Asia</button>
-        <button onclick="SetRegion()">Europe</button>
-        <button onclick="SetRegion()">Oceania</button>
+        <button onclick="SetRegion(event)">Todos</button>
+        <button onclick="SetRegion(event)">Africa</button>
+        <button onclick="SetRegion(event)">Americas</button>
+        <button onclick="SetRegion(event)">Asia</button>
+        <button onclick="SetRegion(event)">Europe</button>
+        <button onclick="SetRegion(event)">Oceania</button>
       </div>
     </header>
     <main></main>
@@ -47,14 +47,17 @@
         });
       }
 
-      function SetRegion() {
+      function SetRegion(event) {
         const region = event.target.textContent.toLowerCase();
         const countryDivs = document.querySelectorAll(".country");
+
         countryDivs.forEach((countryDiv) => {
           const countryRegion = countryDiv
-            .querySelector("p:nth-child(4)")
-            .textContent.split(": ")[1];
-          if (region === "Todos" || countryRegion === region) {
+            .querySelector("p.regiontext")
+            .textContent.split(": ")[1]
+            .toLowerCase();
+
+          if (region === "todos" || countryRegion === region) {
             countryDiv.style.display = "block";
           } else {
             countryDiv.style.display = "none";
@@ -72,10 +75,14 @@
             countryDiv.classList.add("country");
             countryDiv.innerHTML = `
             <h2>${country.name.common}</h2>
-            <img src="${country.flags.png}" alt="Bandeira de ${country.name.common}" />
-            <p>Capital: ${country.capital}</p>
+            <img src="${country.flags.png}" alt="Bandeira de ${
+              country.name.common
+            }" />
+            <p>Capital: ${
+              country.capital ? country.capital : "Não definida"
+            }</p>
             <p>População: ${country.population}</p>
-            <p>Região: ${country.region}</p>
+            <p class="regiontext">Região: ${country.region}</p>
             `;
             main.appendChild(countryDiv);
           });
