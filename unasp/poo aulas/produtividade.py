@@ -1,80 +1,50 @@
-class Produtos:
-    def __init__(self, nome, tipo, fabricante):
-        self.nome = nome
-        self.tipo = tipo
-        self.fabricante = fabricante
-        self.preco = 0
-        self.estoque = 0
-       
-    def alterarpreco(self, novopreco):
-        self.preco = novopreco
+class Aluno:
+  def __init__(self, ra, nome, nascimento, anoescolar):
+    self.ra = ra
+    self.nome = nome
+    self.nascimento = nascimento
+    self.anoescolar = anoescolar
+    self.turma = ''
+    self.nota1 = 0
+    self.nota2 = 0
+    self.nota3 = 0
+    self.nota4 = 0
+    self.media = 0
+  
+  def definir_turma(self, turma):
+    self.turma = turma
+  
+  def definir_notas(self, notanumero, notavalor):
+    match notanumero:
+      case 1:
+        self.nota1 = notavalor
+      case 2:  
+        self.nota2 = notavalor
+      case 3:
+        self.nota3 = notavalor
+      case 4:
+        self.nota4 = notavalor
 
-    def alterarestoque(self, novoestoque):
-        self.estoque = novoestoque
+    self.calcular_media()
 
-    def calcularsaldo(self):
-        saldo = self.estoque * self.preco
-        return saldo
+  def calcular_media(self):
+    self.media = (self.nota1 + self.nota2 + self.nota3 + self.nota4) / 4
+    return self.media  
 
-    def exibirdados(self):
-        dados = 'Nome do produto: ' + self.nome + '\n'
-        dados = dados + 'Tipo do produto: ' + self.tipo + '\n'
-        dados = dados + 'Fabricante do produto: ' + self.fabricante + '\n'
-        dados = dados + 'Preço: ' + str(self.preco) + '\n'
-        dados = dados + 'Estoque: ' + str(self.estoque) + '\n'
-        return dados
-
-
-def CriarProduto():  
-  nome = input('Digite o nome do produto: ')
-  tipo = input('Digite o tipo do produto: ')
-  fabricante = input('Digite o fabricante do produto: ')
-
-  produto = Produtos(nome, tipo, fabricante)
-  return produto
-
-def AlterarProduto(index):
-    produto = produtos[index]
-    usuario = 'p'
-    while usuario in ['p', 'e', 's', 'd']:
-      print(produto.exibirdados())
-      usuario = input("""\nDeseja alterar alguma informação?\n
-Digite [P] para alterar o PREÇO
-Digite [E] para alterar o ESTOQUE
-Digite [S] para calcular o SALDO
-Digite [D] para exibir os DADOS
-Digite qualquer outra tecla para SAIR\n""").lower()
+  def mostrar_dados(self):
+    print(f"RA: {self.ra}\nNome: {self.nome}\nData de Nascimento: {self.nascimento}\nAno Escolar: {self.anoescolar}\nTurma: {self.turma}\nMédia: {self.media:.2f}")
     
-      match usuario:
-        case 'p':
-            preco = float(input('Digite o novo preço do produto: '))
-            produto.alterarpreco(preco)
-        case 'e':
-            estoque = int(input('Digite o novo estoque do produto: '))
-            produto.alterarestoque(estoque)
-        case 's':
-            print('Saldo total: R$' + str(produto.calcularsaldo()))
-        case 'd':
-            print(produto.exibirdados())
-        case _:
-            print('Produto finalizado')
-            produtos.append(produto)
-            break
 
-def ObterProdutoAlterar(produtos):
-    produto = int(input('Digite o número do produto que deseja alterar: ')) - 1
-    AlterarProduto(produto)
+ra = int(input("Digite o RA do aluno: "))
+nome = input("Digite o nome do aluno: ")
+nascimento = input("Digite a data de nascimento do aluno: ")
+anoescolar = int(input("Digite o ano escolar do aluno: "))
 
+Felipe = Aluno(ra, nome, nascimento, anoescolar)
 
+Felipe.definir_turma(input("Digite a turma do aluno: "))
 
-produtos = []
-quer = ''
+for i in range(4):
+  Felipe.definir_notas(int(input("Digite a nota a ser atualizada: ")), float(input("Digite o valor da nota: ")))
 
-while quer != 'n':
-    quer = input('Deseja cadastrar um novo produto? [S/N]').lower()
-    if quer == 's':
-        produtos.append(CriarProduto())
-    elif quer == 'n':
-        ObterProdutoAlterar(produtos)
-    else:
-        print('Opção inválida')
+Felipe.mostrar_dados()
