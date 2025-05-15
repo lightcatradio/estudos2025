@@ -15,6 +15,8 @@ body {
   padding: 2rem;
 }
 
+/* =-=-=-=-=-=-=-=-=-=-=-=-= HEADER =-=-=-=-=-=-=-=-=-=-=-=-= */
+
 header,
 main {
   width: 100%;
@@ -32,26 +34,34 @@ header {
   gap: 20px;
 }
 
-.searchbox,
-.regionbuttons {
+.header__navigation {
   width: 100%;
   display: flex;
-  justify-content: center;
-  gap: 1em;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.searchbox,
+.regionbuttons {
+  width: 50%;
+  display: flex;
+  gap: 10px;
 }
 
 .searchbox input {
-  width: 50%;
+  flex: 4;
+}
+
+.searchbox button,
+.regionbuttons button {
+  flex: 1;
 }
 
 .searchbox button,
 .regionbuttons button {
   background-color: black;
   color: white;
-}
-
-.regionbuttons button {
-  width: 120px;
 }
 
 .searchbox input,
@@ -73,6 +83,8 @@ header {
 .regionbuttons button:active {
   background-color: gray;
 }
+
+/* =-=-=-=-=-=-=-=-=-=-=-=-= MAIN =-=-=-=-=-=-=-=-=-=-=-=-= */
 
 main {
   height: fit-content;
