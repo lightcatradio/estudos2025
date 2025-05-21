@@ -18,7 +18,7 @@
       <div class="header__navigation">
         <div class="searchbox">
           <input id="searchbox" type="text" placeholder="Pesquisar país..." />
-          <button onclick="Search()">Pesquisar</button>
+          <button>Pesquisar</button>
         </div>
         <div class="regionbuttons">
           <button data-region="todos">Todos</button>
@@ -32,86 +32,6 @@
       </div>
     </header>
     <main></main>
-    <script>
-      function Search() {
-        const searchbox = document
-          .getElementById("searchbox")
-          .value.toLowerCase();
-        const countryDivs = document.querySelectorAll(".country");
-        countryDivs.forEach((countryDiv) => {
-          const countryName = countryDiv.dataset.name;
-          if (countryName.includes(searchbox)) {
-            countryDiv.style.display = "block";
-          } else {
-            countryDiv.style.display = "none";
-          }
-        });
-      }
-
-      document.querySelectorAll(".regionbuttons button").forEach((button) => {
-        button.addEventListener("click", () => {
-          const selectedRegion = button.dataset.region;
-          document.querySelectorAll(".country").forEach((country) => {
-            const region = country.dataset.region;
-            country.style.display =
-              selectedRegion === "todos" || region === selectedRegion
-                ? "block"
-                : "none";
-          });
-        });
-      });
-
-      const response = fetch("https://restcountries.com/v3.1/all");
-      response
-        .then((response) => response.json())
-        .then((countries) => {
-          const main = document.querySelector("main");
-          countries.forEach((country) => {
-            const countryDiv = document.createElement("div");
-            countryDiv.classList.add("country");
-
-            countryDiv.dataset.region = country.region.toLowerCase();
-            countryDiv.dataset.name =
-              country.translations.por.common.toLowerCase();
-
-            let translatedRegion;
-            switch (country.region) {
-              case "Africa":
-                translatedRegion = "África";
-                break;
-              case "Americas":
-                translatedRegion = "Américas";
-                break;
-              case "Asia":
-                translatedRegion = "Ásia";
-                break;
-              case "Europe":
-                translatedRegion = "Europa";
-                break;
-              case "Oceania":
-                translatedRegion = "Oceania";
-                break;
-              case "Antarctic":
-                translatedRegion = "Antártica";
-                break;
-              default:
-                translatedRegion = country.region;
-            }
-
-            countryDiv.innerHTML = `
-            <h2>${country.translations.por.common}</h2>
-            <img src="${country.flags.png}" alt="Bandeira de ${
-              country.translations.por.common
-            }" />
-            <p>Capital: ${
-              country.capital ? country.capital : "Não definida"
-            }</p>
-            <p>População: ${country.population}</p>
-            <p class="regiontext">Região: ${translatedRegion}</p>
-            `;
-            main.appendChild(countryDiv);
-          });
-        });
-    </script>
+    <script src="script.js"></script>
   </body>
 </html>
