@@ -7,23 +7,55 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div
-      class="uv"
-      data-locale="en-GB:English (GB),cy-GB:Cymraeg"
-      data-config="my-config.json"
-      data-uri="//www.davidrumsey.com/luna/servlet/iiif/m/RUMSEY~8~1~34865~1180478/manifest"
-      data-collectionindex="0"
-      data-manifestindex="0"
-      data-sequenceindex="0"
-      data-canvasindex="0"
-      data-xywh="-17697,-223,73665,30612"
-      data-rotation="0"
-      style="width: 560px; height: 420px; background-color: #000"
-    ></div>
-    <script
-      type="text/javascript"
-      id="embedUV"
-      src="https://www.davidrumsey.com/uv/lib/embed.js"
-    ></script>
+    <div class="container">
+      <div class="numero">1</div>
+      <div class="numero">2</div>
+      <div class="numero">3</div>
+      <div class="numero">4</div>
+      <div class="numero">5</div>
+      <div class="numero">6</div>
+      <div class="numero">7</div>
+      <div class="numero">8</div>
+      <div class="numero">9</div>
+      <div class="numero">10</div>
+      <div class="numero">11</div>
+      <div class="numero">12</div>
+      <div class="numero">13</div>
+      <div class="numero">14</div>
+      <div class="numero">15</div>
+      <div class="numero">16</div>
+      <div class="numero">17</div>
+      <div class="numero">18</div>
+      <div class="numero">19</div>
+      <div class="numero">20</div>
+      <div class="numero">21</div>
+      <div class="numero">22</div>
+      <div class="numero">23</div>
+      <div class="numero">24</div>
+      <div class="numero">25</div>
+    </div>
+    <script>
+      function corAleatoria() {
+        const letras = "0123456789ABCDEF";
+        let cor = "#";
+        for (let i = 0; i < 6; i++) {
+          cor += letras[Math.floor(Math.random() * 16)];
+        }
+        return cor;
+      }
+
+      const numeros = document.querySelectorAll(".numero");
+
+      numeros.forEach((numero) => {
+        numero.addEventListener("click", () => {
+          numero.classList.toggle("ativo");
+          if (numero.classList.contains("ativo")) {
+            numero.style.backgroundColor = corAleatoria();
+          } else {
+            numero.style.backgroundColor = "";
+          }
+        });
+      });
+    </script>
   </body>
 </html>
